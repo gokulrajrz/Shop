@@ -7,7 +7,11 @@
         :src="item.src"
       ></v-carousel-item>
     </v-carousel>
-    <v-btn x-large color="#fa5b2f" dark class="btnShop px-15"> SHOP NOW </v-btn>
+    <v-hover>
+      <v-btn x-large color="#fa5b2f" dark class="btnShop px-15">
+        SHOP NOW
+      </v-btn>
+    </v-hover>
   </Layout>
 </template>
 
@@ -39,7 +43,10 @@ export default {
 </script>
 
 <style>
-.btnShop{
+.btnShop {
   position: absolute;
+  margin-top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>
