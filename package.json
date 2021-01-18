@@ -1,0 +1,17 @@
+{
+  "name": "shop",
+  "private": true,
+  "scripts": {
+    "build": "gridsome build",
+    "develop": "gridsome develop",
+    "explore": "gridsome explore"
+  },
+  "dependencies": {
+    "gridsome": "^0.7.0",
+    "vuetify": "^2.4.2"
+  },
+  "devDependencies": {
+    "vue-cli-plugin-vuetify": "~2.0.9",
+    "webpack-node-externals": "^2.5.2"
+  }
+}
