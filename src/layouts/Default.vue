@@ -11,7 +11,7 @@
           src="~/assets/shop.jpg"
           height="50px"
           width="50px"
-          class="rounded-circle"
+          class="rounded-circle noselect"
         ></g-image>
       </g-link>
 
@@ -155,12 +155,4 @@ body {
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
-/* @media screen and (min-width: 960px) {
-  .title {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 0;
-  }
-} */
 </style>

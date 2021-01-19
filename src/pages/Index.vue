@@ -8,7 +8,7 @@
       ></v-carousel-item>
     </v-carousel>
     <v-hover v-slot="{ hover }">
-      <g-link to="/Shop">
+      <g-link to="/Shop" class="link btnlnk">
         <v-btn
           x-large
           :color="hover ? '#fff' : '#fa5b2f'"
@@ -58,18 +58,6 @@
     </v-container>
     <v-divider></v-divider>
     <v-footer padless color="#d2d2d2" class="foot pa-1 d-flex justify-center">
-      <!-- <v-layout row wrap justify-space-around class="layout">
-        <v-flex
-          xs4
-          sm3
-          md1
-          class="d-flex justify-center align-center"
-          v-for="(brand, i) in brands"
-          :key="i"
-        >
-          <v-img height="50px" width="200px" :src="brand.src"></v-img>
-        </v-flex>
-      </v-layout> -->
       <label class="lbl noselect">© Copyright 2021 Shop@gmail.com</label>
     </v-footer>
   </div>
@@ -160,12 +148,15 @@ export default {
 };
 </script>
 
-<style>
-.btnShop {
+<style scoped>
+.btnlnk {
   position: absolute;
   margin-top: -150px;
   left: 50%;
   transform: translateX(-50%);
+  
+}
+.btnShop{
   transition: 0.3s;
   border-radius: 0;
   letter-spacing: 5px;
@@ -205,5 +196,8 @@ export default {
   width: 100%;
   position: absolute;
   transition: 0.3s;
+}
+h2{
+  letter-spacing: 5px;
 }
 </style>
