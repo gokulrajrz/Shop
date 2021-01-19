@@ -43,8 +43,8 @@
       </v-layout>
     </v-container>
     <v-divider></v-divider>
-    <v-footer padless color="white" class="foot">
-      <v-layout row wrap justify-space-around class="layout">
+    <v-footer padless color="#d2d2d2" class="foot pa-1 d-flex justify-center">
+      <!-- <v-layout row wrap justify-space-around class="layout">
         <v-flex
           xs4
           sm3
@@ -55,7 +55,8 @@
         >
           <v-img height="50px" width="200px" :src="brand.src"></v-img>
         </v-flex>
-      </v-layout>
+      </v-layout> -->
+      <label class="lbl">© Copyright 2021 Shop@gmail.com</label>
     </v-footer>
   </Layout>
 </template>
@@ -164,9 +165,7 @@ export default {
 .trans {
   transition: 0.2s;
 }
-.foot{
-  min-height: 50px;
-  overflow: hidden;
-  line-height: default;
+.lbl{
+  color: #5e5252de;
 }
 </style>

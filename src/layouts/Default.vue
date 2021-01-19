@@ -6,7 +6,14 @@
         class="d-md-none"
         color="grey"
       ></v-app-bar-nav-icon>
-      <v-icon color="blue" medium class="d-none d-md-flex">Logo</v-icon>
+      <g-link to="/" class="d-none d-md-flex">
+        <g-image
+          src="~/assets/shop.jpg"
+          height="50px"
+          width="50px"
+          class="rounded-circle"
+        ></g-image>
+      </g-link>
 
       <v-toolbar-title class="title">
         <g-link to="/" class="link" style="color: #171717">Shop Name</g-link>
@@ -15,17 +22,30 @@
       <v-spacer />
 
       <g-link to="/" class="link d-none d-md-flex">
-        <v-btn elevation="1" plain class="ml-2 px-5">Home</v-btn>
+        <v-hover v-slot="{ hover }">
+          <v-btn plain class="ml-2 px-5 trans" :class="{ iconHov: hover }" icon>
+            <v-icon>mdi-home-outline</v-icon>
+          </v-btn>
+        </v-hover>
       </g-link>
+
       <g-link to="/shop/" class="link d-none d-md-flex">
-        <v-btn elevation="1" plain class="ml-2 px-5">Shop</v-btn>
+        <v-hover v-slot="{ hover }">
+          <v-btn plain class="ml-2 px-5 trans" :class="{ iconHov: hover }" icon>
+            <v-icon>mdi-store-outline</v-icon>
+          </v-btn>
+        </v-hover>
       </g-link>
       <g-link to="/about/" class="link d-none d-md-flex">
-        <v-btn elevation="1" plain class="ml-2 px-5">About</v-btn>
+        <v-hover v-slot="{ hover }">
+          <v-btn plain class="ml-2 px-5 trans" :class="{ iconHov: hover }" icon>
+            <v-icon>mdi-information-outline</v-icon>
+          </v-btn>
+        </v-hover>
       </g-link>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" absolute temporary>
+    <v-navigation-drawer v-model="drawer" app temporary>
       <v-list nav dense>
         <v-list-item-group
           v-model="group"
@@ -90,7 +110,14 @@ body {
   transform: translateX(-50%);
   padding: 0;
 }
-.mainBdy{
+.mainBdy {
   background-color: #f5f5f5;
+}
+.iconHov {
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1); */
+  background-color: #f5f5f5;
+}
+.trans {
+  transition: 0.3s;
 }
 </style>
