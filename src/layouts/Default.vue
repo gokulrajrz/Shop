@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="site">
     <v-app-bar app sticky color="white">
       <v-app-bar-nav-icon
         @click="drawer = true"
@@ -31,17 +31,24 @@
         </v-hover>
       </g-link>
 
-      <g-link to="/shop/" class="link d-none d-md-flex">
+      <g-link to="/shop" class="link d-none d-md-flex">
         <v-hover v-slot="{ hover }">
           <v-btn plain class="ml-2 px-5 trans" :class="{ iconHov: hover }" icon>
             <v-icon>mdi-store-outline</v-icon>
           </v-btn>
         </v-hover>
       </g-link>
-      <g-link to="/about/" class="link d-none d-md-flex">
+      <g-link to="/about" class="link d-none d-md-flex">
         <v-hover v-slot="{ hover }">
           <v-btn plain class="ml-2 px-5 trans" :class="{ iconHov: hover }" icon>
             <v-icon>mdi-information-outline</v-icon>
+          </v-btn>
+        </v-hover>
+      </g-link>
+      <g-link to="/Cart" class="link">
+        <v-hover v-slot="{ hover }">
+          <v-btn plain class="ml-2 px-5 trans" :class="{ iconHov: hover }" icon>
+            <v-icon>mdi-cart-outline</v-icon>
           </v-btn>
         </v-hover>
       </g-link>
@@ -115,12 +122,18 @@ body {
   line-height: 1.5;
 }
 
+.site {
+  overflow-x: hidden;
+}
+
 .link {
   text-decoration: none;
 }
 
 .title {
-  position: relative;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   padding: 0;
 }
 .mainBdy {
@@ -142,12 +155,12 @@ body {
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
-@media screen and (min-width: 960px) {
+/* @media screen and (min-width: 960px) {
   .title {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     padding: 0;
   }
-}
+} */
 </style>
