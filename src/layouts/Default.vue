@@ -1,54 +1,96 @@
 <template>
-  <v-app>
+  <v-app class="site">
     <v-app-bar app sticky color="white">
       <v-app-bar-nav-icon
         @click="drawer = true"
         class="d-md-none"
         color="grey"
       ></v-app-bar-nav-icon>
-      <v-icon color="blue" medium class="d-none d-md-flex">Logo</v-icon>
+      <g-link to="/" class="d-none d-md-flex">
+        <g-image
+          src="~/assets/shop.jpg"
+          height="50px"
+          width="50px"
+          class="rounded-circle"
+        ></g-image>
+      </g-link>
 
       <v-toolbar-title class="title">
-        <g-link to="/" class="link" style="color: #171717">Shop Name</g-link>
+        <g-link to="/" class="link noselect" style="color: #171717"
+          >Shop Name</g-link
+        >
       </v-toolbar-title>
 
       <v-spacer />
 
       <g-link to="/" class="link d-none d-md-flex">
-        <v-btn elevation="1" plain class="ml-2 px-5">Home</v-btn>
+        <v-hover v-slot="{ hover }">
+          <v-btn plain class="ml-2 px-5 trans" :class="{ iconHov: hover }" icon>
+            <v-icon>mdi-home-outline</v-icon>
+          </v-btn>
+        </v-hover>
       </g-link>
-      <g-link to="/shop/" class="link d-none d-md-flex">
-        <v-btn elevation="1" plain class="ml-2 px-5">Shop</v-btn>
+
+      <g-link to="/shop" class="link d-none d-md-flex">
+        <v-hover v-slot="{ hover }">
+          <v-btn plain class="ml-2 px-5 trans" :class="{ iconHov: hover }" icon>
+            <v-icon>mdi-store-outline</v-icon>
+          </v-btn>
+        </v-hover>
       </g-link>
-      <g-link to="/about/" class="link d-none d-md-flex">
-        <v-btn elevation="1" plain class="ml-2 px-5">About</v-btn>
+      <g-link to="/about" class="link d-none d-md-flex">
+        <v-hover v-slot="{ hover }">
+          <v-btn plain class="ml-2 px-5 trans" :class="{ iconHov: hover }" icon>
+            <v-icon>mdi-information-outline</v-icon>
+          </v-btn>
+        </v-hover>
+      </g-link>
+      <g-link to="/Cart" class="link">
+        <v-hover v-slot="{ hover }">
+          <v-btn plain class="ml-2 px-5 trans" :class="{ iconHov: hover }" icon>
+            <v-icon>mdi-cart-outline</v-icon>
+          </v-btn>
+        </v-hover>
       </g-link>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" absolute temporary>
+    <v-navigation-drawer v-model="drawer" app temporary>
       <v-list nav dense>
         <v-list-item-group
           v-model="group"
           active-class="deep-purple--text text--accent-4"
         >
-          <v-list-item @click="drawer = false">
-            <v-list-item-icon>
-              <v-icon>mdi-home</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item>
+          <g-link to="/" class="link">
+            <v-list-item @click="drawer = false">
+              <v-list-item-icon>
+                <v-icon>mdi-home-outline</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Home</v-list-item-title>
+            </v-list-item>
+          </g-link>
 
-          <v-list-item @click="drawer = false">
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Account</v-list-item-title>
-          </v-list-item>
+          <g-link to="/Shop" class="link">
+            <v-list-item @click="drawer = false">
+              <v-list-item-icon>
+                <v-icon>mdi-store-outline</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Store</v-list-item-title>
+            </v-list-item>
+          </g-link>
+
+          <g-link to="/About" class="link">
+            <v-list-item @click="drawer = false">
+              <v-list-item-icon>
+                <v-icon>mdi-information-outline</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>About Us</v-list-item-title>
+            </v-list-item>
+          </g-link>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
 
-    <v-main>
+    <v-main class="mainBdy">
       <slot />
     </v-main>
   </v-app>
@@ -80,6 +122,10 @@ body {
   line-height: 1.5;
 }
 
+.site {
+  overflow-x: hidden;
+}
+
 .link {
   text-decoration: none;
 }
@@ -90,4 +136,31 @@ body {
   transform: translateX(-50%);
   padding: 0;
 }
+.mainBdy {
+  background-color: #f5f5f5;
+}
+.iconHov {
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1); */
+  background-color: #f5f5f5;
+}
+.trans {
+  transition: 0.3s;
+}
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+/* @media screen and (min-width: 960px) {
+  .title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0;
+  }
+} */
 </style>
