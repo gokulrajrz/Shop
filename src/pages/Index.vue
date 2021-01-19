@@ -21,7 +21,7 @@
       </g-link>
     </v-hover>
     <v-container class="d-flex flex-column pa-0 align-center">
-      <h2 class="mt-10">Featured</h2>
+      <h2 class="openSans mt-10">Featured</h2>
       <v-layout row wrap justify-space-around class="layout mt-5 mb-2">
         <v-flex
           xs12

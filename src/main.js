@@ -21,6 +21,10 @@ export default function (Vue, {
     rel: 'stylesheet',
     href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900',
   });
+  head.link.push({
+    rel: 'stylesheet',
+    href: 'https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap'
+  });
 
   const opts = {
     theme: {

@@ -16,7 +16,7 @@
       </g-link>
 
       <v-toolbar-title class="title">
-        <g-link to="/" class="link noselect" style="color: #171717"
+        <g-link to="/" class="link noselect hachi" style="color: #171717"
           >Shop Name</g-link
         >
       </v-toolbar-title>
@@ -136,6 +136,9 @@ body {
   transform: translateX(-50%);
   padding: 0;
 }
+.openSans{
+  font-family: "Open Sans";
+  }
 .mainBdy {
   background-color: #f5f5f5;
 }
@@ -154,5 +157,8 @@ body {
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
+}
+.hachi{
+  font-family: "Hachi Maru Pop";
 }
 </style>
