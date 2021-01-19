@@ -48,7 +48,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-main>
+    <v-main class="mainBdy">
       <slot />
     </v-main>
   </v-app>
@@ -89,5 +89,8 @@ body {
   left: 50%;
   transform: translateX(-50%);
   padding: 0;
+}
+.mainBdy{
+  background-color: #f5f5f5;
 }
 </style>

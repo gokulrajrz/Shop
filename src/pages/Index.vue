@@ -26,28 +26,37 @@
           sm6
           md4
           class="flx d-flex justify-center align-center"
-          v-for="(product , i) in products"
+          v-for="(product, i) in products"
           :key="i"
         >
           <v-hover v-slot="{ hover }">
             <v-card
               elevation="2"
-              outlined
               :height="hover ? '95%' : '92%'"
               :width="hover ? '95%' : '92%'"
               class="trans mt-3"
             >
-              <v-img
-                height="100%"
-                width="100%"
-                src="https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg"
-              ></v-img>
+              <v-img height="100%" width="100%" :src="product.src"></v-img>
             </v-card>
           </v-hover>
         </v-flex>
       </v-layout>
     </v-container>
-    <v-footer outlined padless> dfgdgh </v-footer>
+    <v-divider></v-divider>
+    <v-footer padless color="white" class="foot">
+      <v-layout row wrap justify-space-around class="layout">
+        <v-flex
+          xs4
+          sm3
+          md1
+          class="d-flex justify-center align-center"
+          v-for="(brand, i) in brands"
+          :key="i"
+        >
+          <v-img height="50px" width="200px" :src="brand.src"></v-img>
+        </v-flex>
+      </v-layout>
+    </v-footer>
   </Layout>
 </template>
 
@@ -75,22 +84,54 @@ export default {
       ],
       products: [
         {
-          src: "~/assets/6.jpg",
+          src:
+            "https://materiaalkundea244cricketball.files.wordpress.com/2015/09/cropped-cricket_ball_by_hedgehog_the_hermit-d6sqiom.jpg?w=900",
         },
         {
-          src: "~/assets/6.jpg",
+          src:
+            "https://i.guim.co.uk/img/media/6a103827889d93363dc6d5539ea31658641007ef/0_65_3000_1800/master/3000.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=6b399c3845339f2acec757d545b8832f",
         },
         {
-          src: "~/assets/6.jpg",
+          src:
+            "https://static.sportzbusiness.com/uploads/2019/05/Racket-and-Shuttle.jpg",
         },
         {
-          src: "~/assets/6.jpg",
+          src:
+            "https://images.indianexpress.com/2019/02/mi-mens-sports-shoes-2-759.jpg",
         },
         {
-          src: "~/assets/6.jpg",
+          src:
+            "https://5.imimg.com/data5/CR/OL/NO/ANDROID-36904487/img-20181220-wa0001-jpg-500x500.jpg",
         },
         {
-          src: "~/assets/6.jpg",
+          src:
+            "https://www.observerbd.com/2020/10/15/observerbd.com_1602783281.jpg",
+        },
+      ],
+      brands: [
+        {
+          src:
+            "https://img2.goodfon.com/wallpaper/nbig/3/1b/nike-nayk-zheltyy-fon-logo.jpg",
+        },
+        {
+          src:
+            "https://www.logaster.com/blog/wp-content/uploads/2020/03/the-3rt-logo.jpg",
+        },
+        {
+          src:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOOoHJT9sR4IrhZse0gZGvF9moiMp_hlvgPg&usqp=CAU",
+        },
+        {
+          src:
+            "https://www.forbesindia.com/media/images/2020/Sep/img_142769_900x600(1).jpg",
+        },
+        {
+          src:
+            "https://preview.thenewsmarket.com/Previews/RBOK/StillAssets/321451_v2.jpg",
+        },
+        {
+          src:
+            "https://www.logodesignlove.com/images/sports/asics-logo.gif",
         },
       ],
       height: 100,
@@ -122,5 +163,10 @@ export default {
 }
 .trans {
   transition: 0.2s;
+}
+.foot{
+  min-height: 50px;
+  overflow: hidden;
+  line-height: default;
 }
 </style>
