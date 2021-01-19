@@ -75,22 +75,22 @@ export default {
       ],
       products: [
         {
-          src: "~/img/6.jpg",
+          src: "~/assets/6.jpg",
         },
         {
-          src: "~/img/6.jpg",
+          src: "~/assets/6.jpg",
         },
         {
-          src: "~/img/6.jpg",
+          src: "~/assets/6.jpg",
         },
         {
-          src: "~/img/6.jpg",
+          src: "~/assets/6.jpg",
         },
         {
-          src: "~/img/6.jpg",
+          src: "~/assets/6.jpg",
         },
         {
-          src: "~/img/6.jpg",
+          src: "~/assets/6.jpg",
         },
       ],
       height: 100,
