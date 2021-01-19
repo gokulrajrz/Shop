@@ -1,5 +1,5 @@
 <template>
-  <Layout>
+  <div>
     <v-carousel hide-delimiters :height="`${height}px`">
       <v-carousel-item
         v-for="(item, i) in items"
@@ -8,15 +8,17 @@
       ></v-carousel-item>
     </v-carousel>
     <v-hover v-slot="{ hover }">
-      <v-btn
-        x-large
-        :color="hover ? '#fff' : '#fa5b2f'"
-        dark
-        class="btnShop px-15"
-        :class="hover ? 'btnorange--text' : 'white--text'"
-      >
-        SHOP NOW
-      </v-btn>
+      <g-link to="/Shop">
+        <v-btn
+          x-large
+          :color="hover ? '#fff' : '#fa5b2f'"
+          dark
+          class="btnShop px-15"
+          :class="hover ? 'btnorange--text' : 'white--text'"
+        >
+          SHOP NOW
+        </v-btn>
+      </g-link>
     </v-hover>
     <v-container class="d-flex flex-column pa-0 align-center">
       <h2 class="mt-10">Featured</h2>
@@ -34,9 +36,21 @@
               elevation="2"
               :height="hover ? '95%' : '92%'"
               :width="hover ? '95%' : '92%'"
-              class="trans mt-3"
+              class="trans mt-3 card d-flex justify-center align-center"
+              :class="{ fltrShadow: hover }"
             >
               <v-img height="100%" width="100%" :src="product.src"></v-img>
+              <div
+                :class="{ fltr: hover }"
+                class="fltrSize d-flex justify-center align-center"
+              >
+                <g-link
+                  to="/"
+                  class="shopLink white--text"
+                  :class="{ 'd-flex': hover }"
+                  >Shop Now</g-link
+                >
+              </div>
             </v-card>
           </v-hover>
         </v-flex>
@@ -56,9 +70,9 @@
           <v-img height="50px" width="200px" :src="brand.src"></v-img>
         </v-flex>
       </v-layout> -->
-      <label class="lbl">© Copyright 2021 Shop@gmail.com</label>
+      <label class="lbl noselect">© Copyright 2021 Shop@gmail.com</label>
     </v-footer>
-  </Layout>
+  </div>
 </template>
 
 
@@ -131,8 +145,7 @@ export default {
             "https://preview.thenewsmarket.com/Previews/RBOK/StillAssets/321451_v2.jpg",
         },
         {
-          src:
-            "https://www.logodesignlove.com/images/sports/asics-logo.gif",
+          src: "https://www.logodesignlove.com/images/sports/asics-logo.gif",
         },
       ],
       height: 100,
@@ -142,6 +155,7 @@ export default {
     let appBar = 64;
     this.height = screen.height - appBar - 140;
     // console.log(this.height);
+    // setInterval(function(){  }, 5000);
   },
 };
 </script>
@@ -165,7 +179,31 @@ export default {
 .trans {
   transition: 0.2s;
 }
-.lbl{
+.lbl {
   color: #5e5252de;
+  font-size: 12px;
+}
+.fltrShadow {
+  filter: drop-shadow(0px 0px 10px gray);
+}
+.card {
+  border-radius: 0px !important;
+}
+.shopLink {
+  display: none;
+  position: absolute;
+  text-decoration: none;
+  font-size: 22px;
+  font-weight: bolder;
+  letter-spacing: 3px;
+}
+.fltr {
+  background-color: rgba(0, 0, 0, 0.397);
+}
+.fltrSize {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  transition: 0.3s;
 }
 </style>

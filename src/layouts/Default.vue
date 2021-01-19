@@ -16,7 +16,9 @@
       </g-link>
 
       <v-toolbar-title class="title">
-        <g-link to="/" class="link" style="color: #171717">Shop Name</g-link>
+        <g-link to="/" class="link noselect" style="color: #171717"
+          >Shop Name</g-link
+        >
       </v-toolbar-title>
 
       <v-spacer />
@@ -51,19 +53,32 @@
           v-model="group"
           active-class="deep-purple--text text--accent-4"
         >
-          <v-list-item @click="drawer = false">
-            <v-list-item-icon>
-              <v-icon>mdi-home</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item>
+          <g-link to="/" class="link">
+            <v-list-item @click="drawer = false">
+              <v-list-item-icon>
+                <v-icon>mdi-home-outline</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Home</v-list-item-title>
+            </v-list-item>
+          </g-link>
 
-          <v-list-item @click="drawer = false">
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Account</v-list-item-title>
-          </v-list-item>
+          <g-link to="/Shop" class="link">
+            <v-list-item @click="drawer = false">
+              <v-list-item-icon>
+                <v-icon>mdi-store-outline</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Store</v-list-item-title>
+            </v-list-item>
+          </g-link>
+
+          <g-link to="/About" class="link">
+            <v-list-item @click="drawer = false">
+              <v-list-item-icon>
+                <v-icon>mdi-information-outline</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>About Us</v-list-item-title>
+            </v-list-item>
+          </g-link>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -105,9 +120,7 @@ body {
 }
 
 .title {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
   padding: 0;
 }
 .mainBdy {
@@ -119,5 +132,22 @@ body {
 }
 .trans {
   transition: 0.3s;
+}
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+@media screen and (min-width: 960px) {
+  .title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0;
+  }
 }
 </style>
