@@ -6,6 +6,7 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import 'animate.css';
 import DefaultLayout from '~/layouts/Default.vue'
+require('typeface-open-sans')
 
 export default function (Vue, {
   appOptions,
