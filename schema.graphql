@@ -1,0 +1,163 @@
+"""Add fields from field values."""
+directive @infer on OBJECT
+
+"""Add reference resolver."""
+directive @reference(
+  """Reference node by a custom field value."""
+  by: String = "id"
+) on FIELD_DEFINITION
+
+"""Return value from another field."""
+directive @proxy(from: String) on FIELD_DEFINITION
+
+"""Paginate a connection in a query. Only supported in page-query."""
+directive @paginate on FIELD
+
+scalar Date
+
+scalar File
+
+scalar Image
+
+enum ImageFit {
+  """Crop to cover both provided dimensions."""
+  cover
+
+  """Embed within both provided dimensions."""
+  contain
+
+  """
+  Ignore the aspect ratio of the input and stretch to both provided dimensions.
+  """
+  fill
+
+  """
+  Preserving aspect ratio, resize the image to be as large as possible while
+  ensuring its dimensions are less than or equal to both those specified.
+  """
+  inside
+
+  """
+  Preserving aspect ratio, resize the image to be as small as possible while
+  ensuring its dimensions are greater than or equal to both those specified.
+  Some of these values are based on the object-fit CSS property.
+  """
+  outside
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+input JSONQueryOperatorInput {
+  """Filter by property of (strict) equality."""
+  eq: JSON
+
+  """Filter by property not equal to provided value."""
+  ne: JSON
+
+  """Filter by property matching any of the provided values."""
+  in: [JSON]
+
+  """Filter by property not matching any of the provided values."""
+  nin: [JSON]
+
+  """
+  Filter nodes that contain the field, including nodes where the field value is null.
+  """
+  exists: Boolean
+
+  """Filter by property matching provided regular expression."""
+  regex: String
+}
+
+type Metadata {
+  siteName: String
+  siteDescription: String
+  siteUrl: String
+  pathPrefix: String
+}
+
+interface Node {
+  id: ID!
+}
+
+interface NodeConnection {
+  totalCount: Int!
+  pageInfo: PageInfo!
+  edges: [NodeConnectionEdge]
+}
+
+interface NodeConnectionEdge {
+  node: Node
+  next: Node
+  previous: Node
+}
+
+type Page {
+  path: String!
+  context: JSON!
+}
+
+input PageFilterInput {
+  path: StringQueryOperatorInput
+  context: JSONQueryOperatorInput
+}
+
+type PageInfo {
+  perPage: Int!
+  currentPage: Int!
+  totalPages: Int!
+  totalItems: Int!
+  hasPreviousPage: Boolean!
+  hasNextPage: Boolean!
+  isFirst: Boolean!
+  isLast: Boolean!
+}
+
+type Query {
+  metadata: Metadata
+  metaData: Metadata @deprecated(reason: "Use Query.metadata instead.")
+  page(path: String!): Page
+  allPage(
+    """Filter pages."""
+    filter: PageFilterInput
+  ): [Page]
+}
+
+input SortArgument {
+  by: String! = "date"
+  order: SortOrder = DESC
+}
+
+enum SortOrder {
+  """Sort ascending"""
+  ASC
+
+  """Sort descending"""
+  DESC
+}
+
+input StringQueryOperatorInput {
+  """Filter by property of (strict) equality."""
+  eq: String
+
+  """Filter by property not equal to provided value."""
+  ne: String
+
+  """Filter by property matching any of the provided values."""
+  in: [String]
+
+  """Filter by property not matching any of the provided values."""
+  nin: [String]
+
+  """
+  Filter nodes that contain the field, including nodes where the field value is null.
+  """
+  exists: Boolean
+
+  """Filter by property matching provided regular expression."""
+  regex: String
+}
+

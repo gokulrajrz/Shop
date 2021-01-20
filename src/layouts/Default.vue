@@ -148,7 +148,7 @@ body {
   background-color: #f5f5f5;
 }
 .trans {
-  transition: 0.3s;
+  transition: all 0.3s;
 }
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -161,5 +161,11 @@ body {
 }
 .hachi{
   font-family: "Hachi Maru Pop";
+}
+.abs{
+  position:absolute;
+}
+.relative{
+  position: relative;
 }
 </style>

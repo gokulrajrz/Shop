@@ -1,7 +1,8 @@
 <template>
   <div>
-    <v-carousel hide-delimiters :height="`${height}px`">
+    <v-carousel cycle hide-delimiters :height="`${height}px`">
       <v-carousel-item
+      
         v-for="(item, i) in items"
         :key="i"
         :src="item.src"

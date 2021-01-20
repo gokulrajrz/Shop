@@ -4,7 +4,7 @@
       <h1 class="openSans text-center mt-5 mb-5">Shopping Bag</h1>
       <v-layout row wrap>
         <v-flex xs12 md8 class="pa-5">
-          <v-card class="white pa-5 rounded-lg">
+          <v-card class="white pa-5 rounded-lg trans">
             <h3 class="openSans noselect font-weight-medium mb-3">
               Items in your Bag ( {{ items.length }} Item{{
                 (s = items.length > 1 ? "s" : "")
@@ -109,12 +109,83 @@
 
               <p class="noselect">Your Cart is Empty!</p>
             </div>
-            <div v-show="items.length">Not Empty</div>
+
+            <div v-show="items.length">
+              <div v-for="(item, i) in items" :key="i">
+                <div
+                  class="item mt-3 d-flex align-center flex-column flex-sm-row"
+                >
+                  <v-img
+                    max-width="100%"
+                    max-height="100%"
+                    :src="item.src"
+                    class="rounded-lg relative itemImg"
+                  ></v-img>
+                  <div
+                    class="itemDetails relative align-self-start d-flex flex-column mt-3 mt-sm-0 pl-2 pl-sm-0"
+                  >
+                    <h3
+                      class="openSans"
+                      style="font-weight: 500; font-size: 24px"
+                    >
+                      {{ item.name }}
+                    </h3>
+                    <p>Brand : {{ item.brand }}</p>
+                    <div class="abs" style="bottom: 0">
+                      <v-hover v-slot="{ hover }">
+                      <div class="rmBorder pa-1 rounded-lg" v-ripple @click.prevent="items.splice(i,1)">
+                        <v-icon class="trans">{{hover ? 'mdi-delete':'mdi-delete-outline'}}</v-icon>
+                        <label class="noselect" style="pointer-events:none">Remove this item</label>
+                      </div>
+                      </v-hover>
+                    </div>
+                    <div class="qty rounded-pill mt-1 abs" style="right: 0">
+                      <v-btn
+                        icon
+                        @click.prevent="
+                          item.quantity > 1 ? item.quantity-- : item.quantity
+                        "
+                        ><v-icon>mdi-minus</v-icon></v-btn
+                      >
+                      <label class="px-2 noselect">{{ item.quantity }}</label>
+                      <v-btn
+                        icon
+                        @click.prevent="
+                          item.quantity < item.stock
+                            ? item.quantity++
+                            : item.quantity
+                        "
+                        ><v-icon>mdi-plus</v-icon></v-btn
+                      >
+                    </div>
+                    <label
+                      class="abs openSans mr-2"
+                      style="
+                        right: 0;
+                        bottom: 0;
+                        font-weight: 600;
+                        font-size: 22px;
+                      "
+                      >Rs.{{ item.price }}</label
+                    >
+                  </div>
+                </div>
+                <v-divider
+                  v-if="i < items.length - 1"
+                  class="divider1 my-5"
+                ></v-divider>
+              </div>
+            </div>
           </v-card>
         </v-flex>
         <v-flex xs12 md4 class="pa-5" style="position: relative">
-          <v-card class="white pa-5 rounded-lg" style="position: relative">
-            <h3 class="openSans noselect font-weight-medium mb-3">Your Billing</h3>
+          <v-card
+            class="white pa-5 rounded-lg trans"
+            style="position: relative"
+          >
+            <h3 class="openSans noselect font-weight-medium mb-3">
+              Your Billing
+            </h3>
             <v-divider></v-divider>
             <div class="py-3">
               <div
@@ -123,12 +194,17 @@
               >
                 <label class="noselect">No item in your Bag.</label>
               </div>
-              <div v-show="items.length">ddfgdfgdfg</div>
+              <div v-show="items.length">
+                <div class="pa-1 d-flex relative" v-for="(item, i) in items" :key="i">
+                  <label>{{item.name}}</label><v-spacer/>
+                  <label>{{item.price * item.quantity}}</label>
+                </div>
+              </div>
             </div>
             <v-divider />
             <div class="amtDiv d-flex pt-3">
               <p class="noselect mb-0">Total Amount</p>
-              <p class="amount noselect mb-0">Rs. {{ amount }}</p>
+              <p class="amount mb-0">Rs.{{ totalPrice() }}</p>
             </div>
             <v-btn
               block
@@ -152,11 +228,51 @@ export default {
   },
   data() {
     return {
-      items: [],
+      items: [
+        {
+          name: "shirt",
+          quantity: 2,
+          stock: 10,
+          price: 100,
+          brand: "nike",
+          src:
+            "https://www.mydesignation.com/wp-content/uploads/2020/08/theyyam-tshirt-mydesignation-image-.jpg",
+        },
+        {
+          name: "shirt travel",
+          quantity: 5,
+          stock: 10,
+          price: 120,
+          brand: "adidas",
+          src:
+            "https://www.mydesignation.com/wp-content/uploads/2020/08/theyyam-tshirt-mydesignation-image-.jpg",
+        },{
+          name: "shirt travel",
+          quantity: 4,
+          stock: 10,
+          price: 90,
+          brand: "adidas",
+          src:
+            "https://www.mydesignation.com/wp-content/uploads/2020/08/theyyam-tshirt-mydesignation-image-.jpg",
+        },
+      ],
       s: "",
       amount: 0,
     };
   },
+  methods:{
+    totalPrice: function () {
+      let amount = 0;
+      this.items.forEach((item , i) => {
+        amount += (item.price * item.quantity);
+        // console.log(amount);
+      });
+      return amount;
+    }
+  },
+  mounted(){
+
+  }
 };
 </script>
 
@@ -172,5 +288,32 @@ export default {
 .amount {
   position: absolute;
   right: 0;
+}
+.itemDetails {
+  width: 100%;
+  min-height: 100px;
+}
+.qty {
+  border: 1px solid grey;
+}
+.rmBorder{
+  border: 1px solid grey;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 600px) {
+  .itemDetails {
+    margin-left: 16px;
+    width: calc(100% - 146px);
+    min-height: 130px;
+  }
+  .itemImg {
+    height: 130px;
+    width: 130px;
+  }
+
+  .divider1 {
+    margin-left: 146px;
+  }
 }
 </style>
