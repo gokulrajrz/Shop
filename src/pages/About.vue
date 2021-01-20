@@ -10,28 +10,28 @@
           iste reprehenderit maxime! Iusto.
         </p>
         <v-layout row wrap class="pa-4">
-          <v-flex xs12 sm6 class="d-flex align-start">
+          <v-flex xs12 sm6 class="d-flex align-start mt-1">
             <v-icon x-large>mdi-map-marker-outline</v-icon>
             <div class="ml-3">
               <h2>Address</h2>
               <p>121 Rock Sreet, 21 Avenue, New York, NY 92103-9000.</p>
             </div>
           </v-flex>
-          <v-flex xs12 sm6 class="d-flex align-start">
+          <v-flex xs12 sm6 class="d-flex align-start mt-1">
             <v-icon x-large>mdi-clock-time-eight-outline</v-icon>
             <div class="ml-3">
               <h2>Opening Hours</h2>
               <p>Monday to Friday : 8:00 AM to 8:00 PM.</p>
             </div>
           </v-flex>
-          <v-flex xs12 sm6 class="d-flex align-start">
+          <v-flex xs12 sm6 class="d-flex align-start mt-1">
             <v-icon x-large>mdi-phone-outline</v-icon>
             <div class="ml-3">
               <h2>Phone</h2>
               <p>Mobile : +919876543210</p>
             </div>
           </v-flex>
-          <v-flex xs12 sm6 class="d-flex align-start">
+          <v-flex xs12 sm6 class="d-flex align-start mt-1">
             <v-icon x-large>mdi-email-outline</v-icon>
             <div class="ml-3">
               <h2>Email</h2>

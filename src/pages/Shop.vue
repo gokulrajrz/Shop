@@ -7,7 +7,7 @@
 <script scoped>
 export default {
   metaInfo: {
-    title: "About us",
+    title: "Shop",
   },
 };
 </script>
