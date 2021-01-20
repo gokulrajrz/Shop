@@ -5,7 +5,7 @@
       <v-layout row wrap>
         <v-flex xs12 md8 class="pa-5">
           <v-card class="white pa-5 rounded-lg">
-            <h3 class="openSans font-weight-medium mb-3">
+            <h3 class="openSans noselect font-weight-medium mb-3">
               Items in your Bag ( {{ items.length }} Item{{
                 (s = items.length > 1 ? "s" : "")
               }}
@@ -22,6 +22,7 @@
                 width="220"
                 height="220"
                 viewBox="0 0 220 220"
+                class="animate__animated animate__bounceIn"
               >
                 <defs>
                   <path
@@ -105,28 +106,29 @@
                   </g>
                 </g>
               </svg>
-              <p>Your Cart is Empty!</p>
+
+              <p class="noselect">Your Cart is Empty!</p>
             </div>
             <div v-show="items.length">Not Empty</div>
           </v-card>
         </v-flex>
         <v-flex xs12 md4 class="pa-5" style="position: relative">
           <v-card class="white pa-5 rounded-lg" style="position: relative">
-            <h3 class="openSans font-weight-medium mb-3">Your Billing</h3>
+            <h3 class="openSans noselect font-weight-medium mb-3">Your Billing</h3>
             <v-divider></v-divider>
             <div class="py-3">
               <div
                 v-if="!items.length"
                 class="d-flex justify-center align-center"
               >
-                <label>No item in your Bag.</label>
+                <label class="noselect">No item in your Bag.</label>
               </div>
               <div v-show="items.length">ddfgdfgdfg</div>
             </div>
             <v-divider />
             <div class="amtDiv d-flex pt-3">
-              <p class="mb-0">Total Amount</p>
-              <p class="amount mb-0">Rs. {{ amount }}</p>
+              <p class="noselect mb-0">Total Amount</p>
+              <p class="amount noselect mb-0">Rs. {{ amount }}</p>
             </div>
             <v-btn
               block
