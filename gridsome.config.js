@@ -6,5 +6,7 @@
 
 module.exports = {
   siteName: 'ShopName',
-  plugins: []
+  plugins: [
+    
+  ]
 }
