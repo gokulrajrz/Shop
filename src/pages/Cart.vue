@@ -133,28 +133,26 @@
                     <p>Brand : {{ item.brand }}</p>
                     <div class="abs" style="bottom: 0">
                       <v-hover v-slot="{ hover }">
-                      <div class="rmBorder pa-1 rounded-lg" v-ripple @click.prevent="items.splice(i,1)">
-                        <v-icon class="trans">{{hover ? 'mdi-delete':'mdi-delete-outline'}}</v-icon>
-                        <label class="noselect" style="pointer-events:none">Remove this item</label>
-                      </div>
+                        <div
+                          class="rmBorder pa-1 rounded-lg"
+                          v-ripple
+                          @click.prevent="removeItem(i)"
+                        >
+                          <v-icon class="trans">{{
+                            hover ? "mdi-delete" : "mdi-delete-outline"
+                          }}</v-icon>
+                          <label class="noselect" style="pointer-events: none"
+                            >Remove this item</label
+                          >
+                        </div>
                       </v-hover>
                     </div>
                     <div class="qty rounded-pill mt-1 abs" style="right: 0">
-                      <v-btn
-                        icon
-                        @click.prevent="
-                          item.quantity > 1 ? item.quantity-- : item.quantity
-                        "
+                      <v-btn icon @click.prevent="subQty(item)"
                         ><v-icon>mdi-minus</v-icon></v-btn
                       >
                       <label class="px-2 noselect">{{ item.quantity }}</label>
-                      <v-btn
-                        icon
-                        @click.prevent="
-                          item.quantity < item.stock
-                            ? item.quantity++
-                            : item.quantity
-                        "
+                      <v-btn icon @click.prevent="addQty(item)"
                         ><v-icon>mdi-plus</v-icon></v-btn
                       >
                     </div>
@@ -195,9 +193,14 @@
                 <label class="noselect">No item in your Bag.</label>
               </div>
               <div v-show="items.length">
-                <div class="pa-1 d-flex relative" v-for="(item, i) in items" :key="i">
-                  <label>{{item.name}}</label><v-spacer/>
-                  <label>{{item.price * item.quantity}}</label>
+                <div
+                  class="pa-1 d-flex relative"
+                  v-for="(item, i) in items"
+                  :key="i"
+                >
+                  <label>{{ item.name }}</label
+                  ><v-spacer />
+                  <label>{{ item.price * item.quantity }}</label>
                 </div>
               </div>
             </div>
@@ -222,58 +225,59 @@
 </template>
 
 <script>
-
 export default {
   metaInfo: {
     title: "Cart",
   },
   data() {
     return {
-      items: [
-        {
-          name: "shirt",
-          quantity: 2,
-          stock: 10,
-          price: 100,
-          brand: "nike",
-          src:
-            "https://www.mydesignation.com/wp-content/uploads/2020/08/theyyam-tshirt-mydesignation-image-.jpg",
-        },
-        {
-          name: "shirt travel",
-          quantity: 5,
-          stock: 10,
-          price: 120,
-          brand: "adidas",
-          src:
-            "https://www.mydesignation.com/wp-content/uploads/2020/08/theyyam-tshirt-mydesignation-image-.jpg",
-        },{
-          name: "shirt travel",
-          quantity: 4,
-          stock: 10,
-          price: 90,
-          brand: "adidas",
-          src:
-            "https://www.mydesignation.com/wp-content/uploads/2020/08/theyyam-tshirt-mydesignation-image-.jpg",
-        },
-      ],
+      items: [],
       s: "",
       amount: 0,
     };
   },
-  methods:{
+  methods: {
     totalPrice: function () {
       let amount = 0;
-      this.items.forEach((item , i) => {
-        amount += (item.price * item.quantity);
+      this.items.forEach((item, i) => {
+        amount += item.price * item.quantity;
         // console.log(amount);
       });
       return amount;
+    },
+    reflectItem() {
+      localStorage.setItem("items", JSON.stringify(this.items));
+    },
+    addQty(item) {
+      // item.quantity < item.stock ? item.quantity++ : item.quantity;
+      if (item.quantity < item.stock) {
+        item.quantity++;
+        this.reflectItem();
+      }
+      return item.quantity;
+    },
+    subQty(item) {
+      // item.quantity > 1 ? item.quantity-- : item.quantity
+      if(item.quantity > 1){
+        item.quantity--;
+        this.reflectItem();
+      }
+      return item.quantity;
+    },
+    removeItem(i){
+      this.items.splice(i, 1);
+      this.reflectItem();
+    },
+  },
+  mounted() {
+    if (!localStorage.getItem("items")) {
+      localStorage.setItem("items", JSON.stringify(this.items));
+      // console.log('item not exists');
+    } else {
+      this.items = JSON.parse(window.localStorage.getItem("items"));
+      // console.log('item exists');
     }
   },
-  mounted(){
-
-  }
 };
 </script>
 
@@ -297,7 +301,7 @@ export default {
 .qty {
   border: 1px solid grey;
 }
-.rmBorder{
+.rmBorder {
   border: 1px solid grey;
   cursor: pointer;
 }

@@ -8,12 +8,6 @@ module.exports = {
   siteName: 'ShopName',
   icon: "src/assets/shop.jpg",
   plugins: [
-    {
-      use: '@gridsome/source-filesystem',
-      options: {
-        path: 'src/data/items.json',
-        typeName: 'data'
-      }
-    }
+    
   ]
 }

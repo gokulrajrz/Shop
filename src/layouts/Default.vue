@@ -45,6 +45,9 @@
           </v-btn>
         </v-hover>
       </g-link>
+      <v-btn plain class="ml-2 px-5 trans" icon @click.prevent="clearStorage()">
+        <v-icon>mdi-cart-outline</v-icon>
+      </v-btn>
       <g-link to="/Cart" class="link">
         <v-hover v-slot="{ hover }">
           <v-btn plain class="ml-2 px-5 trans" :class="{ iconHov: hover }" icon>
@@ -109,7 +112,54 @@ export default {
   data: () => ({
     drawer: false,
     group: null,
+    items: [
+      {
+          name: "shirt",
+          quantity: 2,
+          stock: 10,
+          price: 100,
+          brand: "nike",
+          src:
+            "https://www.mydesignation.com/wp-content/uploads/2020/08/theyyam-tshirt-mydesignation-image-.jpg",
+        },
+        {
+          name: "shirt travel",
+          quantity: 5,
+          stock: 10,
+          price: 120,
+          brand: "adidas",
+          src:
+            "https://www.mydesignation.com/wp-content/uploads/2020/08/theyyam-tshirt-mydesignation-image-.jpg",
+        },{
+          name: "shirt travel",
+          quantity: 4,
+          stock: 10,
+          price: 90,
+          brand: "adidas",
+          src:
+            "https://www.mydesignation.com/wp-content/uploads/2020/08/theyyam-tshirt-mydesignation-image-.jpg",
+        },
+    ],
   }),
+  mounted() {
+    if (!localStorage.getItem("items")) {
+      localStorage.setItem("items", JSON.stringify(this.items)); 
+      // console.log('item not exists');
+    }else{
+      console.log('item exists');
+      if(!JSON.parse(window.localStorage.getItem('items')).length){
+        // console.log("qwr");
+        localStorage.setItem("items", JSON.stringify(this.items)); 
+      }else{
+        this.items = JSON.parse(window.localStorage.getItem('items'));
+      }
+    }
+  },
+  methods: {
+    clearStorage() {
+      localStorage.clear();
+    },
+  },
 };
 </script>
 
@@ -137,9 +187,9 @@ body {
   transform: translateX(-50%);
   padding: 0;
 }
-.openSans{
+.openSans {
   font-family: "Open Sans";
-  }
+}
 .mainBdy {
   background-color: #f5f5f5;
 }
@@ -159,13 +209,13 @@ body {
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
-.hachi{
+.hachi {
   font-family: "Hachi Maru Pop";
 }
-.abs{
-  position:absolute;
+.abs {
+  position: absolute;
 }
-.relative{
+.relative {
   position: relative;
 }
 </style>
