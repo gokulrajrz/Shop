@@ -222,6 +222,7 @@
 </template>
 
 <script>
+
 export default {
   metaInfo: {
     title: "Cart",
