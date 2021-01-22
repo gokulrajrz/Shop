@@ -2,8 +2,8 @@
   <Layout>
     <transition
       name="fade"
-      enter-active-class="animate__animated animate__backInRight animate__faster"
-      leave-active-class="animate__animated animate__backOutLeft animate__faster"
+      enter-active-class="animate__animated animate__bounceInRight animate__faster"
+      leave-active-class="animate__animated animate__fadeOutDown "
       mode="out-in"
     >
       <router-view />
