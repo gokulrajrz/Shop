@@ -72,6 +72,7 @@ export default {
   },
   data() {
     return {
+      page: "",
       items: [
         {
           src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
@@ -141,6 +142,8 @@ export default {
     };
   },
   mounted() {
+    this.$emit('page',this.page);
+
     let appBar = 64;
     this.height = screen.height - appBar - 140;
     // console.log(this.height);

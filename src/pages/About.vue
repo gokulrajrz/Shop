@@ -93,6 +93,7 @@ export default {
   },
   data() {
     return {
+      page: "about",
       email: "",
       name: "",
       msg: "",
@@ -108,6 +109,9 @@ export default {
       },
     };
   },
+  mounted(){
+    this.$emit('page',this.page);
+  }
 };
 </script>
 

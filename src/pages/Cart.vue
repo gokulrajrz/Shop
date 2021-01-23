@@ -231,6 +231,7 @@ export default {
   },
   data() {
     return {
+      page: "cart",
       items: [],
       s: "",
       amount: 0,
@@ -270,6 +271,8 @@ export default {
     },
   },
   mounted() {
+    this.$emit('page',this.page);
+
     if (!localStorage.getItem("items")) {
       localStorage.setItem("items", JSON.stringify(this.items));
       // console.log('item not exists');

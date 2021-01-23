@@ -9,5 +9,13 @@ export default {
   metaInfo: {
     title: "Shop",
   },
+  data(){
+    return{
+      page: "shop",
+    }
+  },
+  mounted(){
+    this.$emit('page',this.page);
+  }
 };
 </script>

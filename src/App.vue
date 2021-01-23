@@ -1,12 +1,12 @@
 <template>
-  <Layout>
+  <Layout :page="page">
     <transition
       name="fade"
       enter-active-class="animate__animated animate__bounceInRight animate__faster"
       leave-active-class="animate__animated animate__fadeOutDown "
       mode="out-in"
     >
-      <router-view />
+      <router-view @page="currentPage" />
     </transition>
   </Layout>
 </template>
@@ -33,6 +33,17 @@ export default {
         },
       ],
     };
+  },
+  data() {
+    return{
+      page: 'app'
+    }
+  },
+  methods: {
+    currentPage: function (p) {
+      this.page = p;
+      // console.log(p);
+    },
   },
 };
 </script>

@@ -51,7 +51,8 @@ export default function (Vue, {
           lightgray: "#BDBDBD",
           lightpink: "#FFCFE3",
           white: "#FFFFFF",
-          btnorange: "#fa5b2f"
+          btnorange: "#fa5b2f",
+          drawerItemColor: "#757575",
         }
       }
     }

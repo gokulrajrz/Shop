@@ -1,12 +1,12 @@
 <template>
   <v-app class="site">
-    <v-app-bar app sticky color="white">
+    <v-app-bar app sticky color="white" id="navBar">
       <v-app-bar-nav-icon
-        @click="drawer = true"
+        @click="drawerOpen = !drawerOpen"
         class="d-md-none"
         color="grey"
       ></v-app-bar-nav-icon>
-      <g-link to="/" class="d-none d-md-flex">
+      <g-link :to="`/${pages[0]}`" class="d-none d-md-flex">
         <g-image
           src="~/assets/shop.jpg"
           height="50px"
@@ -15,8 +15,9 @@
         ></g-image>
       </g-link>
 
-      <v-toolbar-title class="title">
-        <g-link to="/" class="link noselect hachi" style="color: #171717">{{
+      <v-toolbar-title class="title" @click="drawerOpen = false">
+        <g-link :to="`/${pages[0]}`" class="link noselect hachi" style="color: #171717" 
+        @click="drawerOpen = false">{{
           $static.metadata.siteName
         }}</g-link>
       </v-toolbar-title>
@@ -25,7 +26,7 @@
 
       <v-tooltip bottom color="rgba(140, 0, 179,0.5)">
         <template v-slot:activator="{ on, attrs }">
-          <g-link to="/" class="link d-none d-md-flex">
+          <g-link :to="`/${pages[0]}`" class="link d-none d-md-flex">
             <v-hover v-slot="{ hover }">
               <v-btn
                 plain
@@ -45,7 +46,7 @@
 
       <v-tooltip bottom color="rgba(140, 0, 179,0.5)">
         <template v-slot:activator="{ on, attrs }">
-          <g-link to="/shop" class="link d-none d-md-flex">
+          <g-link :to="`/${pages[1]}`" class="link d-none d-md-flex">
             <v-hover v-slot="{ hover }">
               <v-btn
                 plain
@@ -65,7 +66,7 @@
 
       <v-tooltip bottom color="rgba(140, 0, 179,0.5)">
         <template v-slot:activator="{ on, attrs }">
-          <g-link to="/about" class="link d-none d-md-flex">
+          <g-link :to="`/${pages[2]}`" class="link d-none d-md-flex">
             <v-hover v-slot="{ hover }">
               <v-btn
                 plain
@@ -93,7 +94,7 @@
 
       <v-tooltip bottom color="rgba(140, 0, 179,0.5)">
         <template v-slot:activator="{ on, attrs }">
-          <g-link to="/Cart" class="link">
+          <g-link :to="`/${pages[3]}`" class="link">
             <v-hover v-slot="{ hover }">
               <v-btn
                 plain
@@ -102,11 +103,13 @@
                 icon
                 v-bind="attrs"
                 v-on="on"
+                 @click="drawerOpen = false"
               >
                 <v-icon>mdi-cart-outline</v-icon>
                 <span
                   v-if="count"
-                  class="abs countTag purple white--text rounded-circle animate__animated animate__bounceIn"
+                  class="abs countTag purple white--text rounded-circle 
+                  animate__animated animate__bounceIn"
                   >{{ count }}</span
                 >
               </v-btn>
@@ -117,61 +120,24 @@
       </v-tooltip>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" app temporary>
-      <v-list nav dense>
-        <div class="drawerHead d-flex justify-center align-center">
-          <span class="drawerHeading openSans purple--text">{{
-            $static.metadata.siteName
-          }}</span>
-        </div>
-        <v-divider class="mx-3" />
-        <v-list-item-group
-          v-model="group"
-          class="mt-2"
-          active-class="deep-purple--text text--accent-4"
-        >
-          <g-link to="/" class="link">
-            <v-list-item @click="drawer = false">
-              <v-list-item-icon>
-                <v-icon>mdi-home-outline</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title
-                ><span class="drawerItem">Home</span></v-list-item-title
-              >
-            </v-list-item>
-          </g-link>
+    <div class="relative">
 
-          <g-link to="/Shop" class="link">
-            <v-list-item @click="drawer = false">
-              <v-list-item-icon>
-                <v-icon>mdi-store-outline</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title
-                ><span class="drawerItem">Store</span></v-list-item-title
-              >
-            </v-list-item>
-          </g-link>
+      <Drawer
+        :style="`width: 100%; z-index:4;margin-top:${drawerMarg}px;
+        height:calc(100vh - ${drawerMarg}px);
+        position:fixed;`"
+        class="d-block d-md-none"
+        :drawer="drawerOpen"
+        :pages="pages"
+        :page="page"
+        @status="drawerOpen = false"
+        :class="[{'poEvnts-none': !drawerOpen}]"
+      ></Drawer>
 
-          <g-link to="/About" class="link">
-            <v-list-item @click="drawer = false">
-              <v-list-item-icon>
-                <v-icon>mdi-information-outline</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title
-                ><span class="drawerItem">About Us</span></v-list-item-title
-              >
-            </v-list-item>
-          </g-link>
-        </v-list-item-group>
-      </v-list>
-      <div class="pow d-flex justify-center align-center abs py-3 white--text openSans">
-        <span>Powered By RRRRRR</span>
-      </div>
-    </v-navigation-drawer>
-
-    <v-main class="mainBdy">
-      <slot />
-    </v-main>
+      <v-main class="mainBdy">
+        <slot />
+      </v-main>
+    </div>
   </v-app>
 </template>
 
@@ -184,10 +150,13 @@ query {
 </static-query>
 
 <script>
+import Drawer from "../components/drawer.vue";
+
 export default {
   data: () => ({
-    drawer: false,
-    group: null,
+    drawerMarg: 0,
+    drawerOpen: false,
+    pages: ['','shop','about','cart'],
     items: [
       {
         name: "shirt",
@@ -219,7 +188,14 @@ export default {
     ],
     count: 0,
   }),
+  props: [
+    'page'
+  ],
   mounted() {
+    this.drawerMarg = document.querySelector("#navBar").clientHeight;
+    // console.log(this.$refs.drawBg);
+    // this.$refs.drawBg.style.backgroundColor = "rgba(156,39,176,0.3)";
+
     if (!localStorage.getItem("items")) {
       localStorage.setItem("items", JSON.stringify(this.items));
       // console.log('item not exists');
@@ -235,12 +211,16 @@ export default {
     this.count = this.items.length;
     setInterval(() => {
       this.count = JSON.parse(window.localStorage.getItem("items")).length;
+      this.drawerMarg = document.querySelector("#navBar").clientHeight;
     }, 200);
   },
   methods: {
     clearStorage() {
-      localStorage.clear();
+      // localStorage.clear();
     },
+  },
+  components: {
+    Drawer,
   },
 };
 </script>
@@ -305,22 +285,7 @@ body {
   margin-right: -30px;
   padding: 2px;
 }
-.drawerHead {
-  width: 100%;
-  height: 75px;
-}
-.drawerHeading {
-  letter-spacing: 3px;
-  font-size: 20px;
-}
-.drawerItem {
-  font-size: 15px;
-  font-weight: 300;
-}
-.pow {
-  width: 100%;
-  bottom: 0;
-  font-size: 12px;
-  background-color: rgba(186,85,211,0.5);
+.poEvnts-none{
+  pointer-events: none;
 }
 </style>
