@@ -1,11 +1,18 @@
 <template>
   <v-app class="site">
     <v-app-bar app sticky color="white" id="navBar">
-      <v-app-bar-nav-icon
-        @click="drawerOpen = !drawerOpen"
-        class="d-md-none"
-        color="grey"
-      ></v-app-bar-nav-icon>
+
+
+      <v-btn icon @click="drawerOpen = !drawerOpen"
+        class="d-md-none">
+        <div class="burger d-flex flex-column justify-center" :class="[{'burgerOpen':drawerOpen}]">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
+        </div>
+      </v-btn>
+
+
       <g-link :to="`/${pages[0]}`" class="d-none d-md-flex">
         <g-image
           src="~/assets/shop.jpg"
@@ -134,7 +141,7 @@
         :class="[{'poEvnts-none': !drawerOpen}]"
       ></Drawer>
 
-      <v-main class="mainBdy">
+      <v-main>
         <slot />
       </v-main>
     </div>
@@ -192,6 +199,7 @@ export default {
     'page'
   ],
   mounted() {
+    document.querySelector('.site').style.backgroundColor="#f5f5f5";
     this.drawerMarg = document.querySelector("#navBar").clientHeight;
     // console.log(this.$refs.drawBg);
     // this.$refs.drawBg.style.backgroundColor = "rgba(156,39,176,0.3)";
@@ -237,6 +245,7 @@ body {
 
 .site {
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 .link {
@@ -251,9 +260,6 @@ body {
 }
 .openSans {
   font-family: "Open Sans";
-}
-.mainBdy {
-  background-color: #f5f5f5;
 }
 .iconHov {
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1); */
@@ -271,6 +277,18 @@ body {
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
+/* .scrollbarHide {
+  overflow: auto;
+}
+
+.examscrollbarHideple::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbarHide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+} */
 .hachi {
   font-family: "Hachi Maru Pop";
 }
@@ -287,5 +305,26 @@ body {
 }
 .poEvnts-none{
   pointer-events: none;
+}
+.burger{
+  width: 20px;
+  height: 20px;
+}
+.burger div{
+    width: 100%;
+    height: 2px;
+    background-color: #9e9e9e;
+    margin: 1.5px 0;
+    transition: all 0.2s ease-in-out;
+}
+
+.burgerOpen .line2{
+    opacity: 0;
+}
+.burgerOpen .line1{
+    transform: rotate(45deg) translate(3.5px, 3.5px)
+}
+.burgerOpen .line3{
+    transform: rotate(-45deg) translate(3.5px, -3.5px);
 }
 </style>

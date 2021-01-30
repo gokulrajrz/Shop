@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <v-carousel cycle hide-delimiters :height="`${height}px`">
       <v-carousel-item
       
@@ -57,7 +57,7 @@
         </v-flex>
       </v-layout>
     </v-container>
-    <v-divider></v-divider>
+    <v-divider class="mt-2"></v-divider>
     <v-footer padless color="#d2d2d2" class="foot pa-1 d-flex justify-center">
       <label class="lbl noselect">© Copyright 2021 Shop@gmail.com</label>
     </v-footer>
@@ -138,16 +138,15 @@ export default {
           src: "https://www.logodesignlove.com/images/sports/asics-logo.gif",
         },
       ],
-      height: 100,
+      height: 50,
     };
   },
   mounted() {
     this.$emit('page',this.page);
 
     let appBar = 64;
-    this.height = screen.height - appBar - 140;
+    this.height = screen.height - appBar -105;
     // console.log(this.height);
-    // setInterval(function(){  }, 5000);
   },
 };
 </script>
@@ -172,7 +171,7 @@ export default {
   height: 350px;
 }
 .trans {
-  transition: 0.2s;
+  transition: all 0.2s ease-in-out;
 }
 .lbl {
   color: #5e5252de;

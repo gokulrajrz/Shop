@@ -61,8 +61,6 @@ export default function (Vue, {
 
   appOptions.vuetify = new Vuetify(opts);
 
-
-
   // Set default layout as a global component
   Vue.component('Layout', DefaultLayout)
 }
